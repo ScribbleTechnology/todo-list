@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoFormComponent } from './todo-form.component';
+import {NO_ERRORS_SCHEMA} from "@angular/core";
 
 describe('TodoFormComponent', () => {
   let component: TodoFormComponent;
@@ -8,7 +9,8 @@ describe('TodoFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TodoFormComponent ]
+      declarations: [ TodoFormComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));

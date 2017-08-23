@@ -20,7 +20,7 @@ describe('TodoListComponent', () => {
   });
 
   it('should bind list of todo tasks', () => {
-    let tasks = [{id: 1, task: 'first task'}, {id: 2, task: 'second task'}];
+    let tasks = [{task: 'first task'}, {task: 'second task'}];
     fixture.componentInstance.tasks = tasks;
     fixture.detectChanges();
 

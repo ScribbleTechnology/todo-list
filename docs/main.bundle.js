@@ -79,28 +79,27 @@ module.exports = "<div class=\"row\">\n  <div class=\"container\">\n    <div cla
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TodoFormComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__todo_form_service__ = __webpack_require__("../../../../../src/app/todo-form/todo-form.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 var TodoFormComponent = (function () {
-    function TodoFormComponent() {
+    function TodoFormComponent(service) {
+        this.service = service;
     }
     TodoFormComponent.prototype.ngOnInit = function () {
-        this.initTodoItems();
+        this.tasks = this.service.getTasks();
     };
-    TodoFormComponent.prototype.initTodoItems = function () {
-        this.tasks = [
-            { id: 1, task: 'Get Oil Change' },
-            { id: 2, task: 'Grocery Shopping' },
-            { id: 3, task: 'Create Angular 4 Demo' }
-        ];
-    };
-    TodoFormComponent.prototype.onClick = function (item) {
-        this.tasks.push({ id: 4, task: item });
+    TodoFormComponent.prototype.onClick = function (task) {
+        this.tasks.push({ task: task });
     };
     return TodoFormComponent;
 }());
@@ -108,10 +107,50 @@ TodoFormComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'todo-form',
         template: __webpack_require__("../../../../../src/app/todo-form/todo-form.component.html"),
-    })
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__todo_form_service__["a" /* TodoFormService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__todo_form_service__["a" /* TodoFormService */]) === "function" && _a || Object])
 ], TodoFormComponent);
 
+var _a;
 //# sourceMappingURL=todo-form.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/todo-form/todo-form.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TodoFormService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var TodoFormService = (function () {
+    function TodoFormService() {
+        this.tasks = [
+            { task: 'Get Oil Change' },
+            { task: 'Grocery Shopping' },
+            { task: 'Create Angular 4 Demo' }
+        ];
+    }
+    TodoFormService.prototype.getTasks = function () {
+        return this.tasks;
+    };
+    return TodoFormService;
+}());
+TodoFormService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+    __metadata("design:paramtypes", [])
+], TodoFormService);
+
+//# sourceMappingURL=todo-form.service.js.map
 
 /***/ }),
 
@@ -141,8 +180,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var TodoListComponent = (function () {
     function TodoListComponent() {
     }
-    TodoListComponent.prototype.ngOnInit = function () {
-    };
     return TodoListComponent;
 }());
 __decorate([
@@ -153,8 +190,7 @@ TodoListComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'todo-list',
         template: __webpack_require__("../../../../../src/app/todo-list/todo-list.component.html"),
-    }),
-    __metadata("design:paramtypes", [])
+    })
 ], TodoListComponent);
 
 //# sourceMappingURL=todo-list.component.js.map
@@ -211,12 +247,14 @@ AppRoutingModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__todo_list_todo_list_component__ = __webpack_require__("../../../../../src/app/todo-list/todo-list.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__add_todo_add_todo_component__ = __webpack_require__("../../../../../src/app/add-todo/add-todo.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__todo_form_todo_form_service__ = __webpack_require__("../../../../../src/app/todo-form/todo-form.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -243,7 +281,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_7__angular_forms__["a" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_2_ngx_bootstrap__["a" /* AlertModule */].forRoot()
         ],
-        providers: [],
+        providers: [__WEBPACK_IMPORTED_MODULE_8__todo_form_todo_form_service__["a" /* TodoFormService */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_4__todo_form_todo_form_component__["a" /* TodoFormComponent */]]
     })
 ], AppModule);

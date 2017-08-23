@@ -1,3 +1,15 @@
-<p>
-  add-todo works!
-</p>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-md-2 control-label">Task</label>
+    <div class="col-md-10">
+      <input name="description" type="text" class="form-control" [(ngModel)]="task" >
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-2 text-right">
+      <input name="add-task" type="button" class="btn btn-primary" value="Add Item" (click)="addTask()">
+    </div>
+  </div>
+</form>
+
+

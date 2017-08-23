@@ -21,7 +21,9 @@ describe('TodoFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
-    expect(component).toBeTruthy();
+  it('should add new task to task list', () => {
+    fixture.componentInstance.onClick('new item added');
+
+    expect(fixture.componentInstance.tasks.length).toEqual(4);
   });
 });

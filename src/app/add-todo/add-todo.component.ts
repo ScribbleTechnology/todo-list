@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'add-todo',
   templateUrl: './add-todo.component.html',
-  styleUrls: ['./add-todo.component.css']
 })
+
 export class AddTodoComponent implements OnInit {
+  task: string;
 
-  constructor() { }
+  @Output() newTask: EventEmitter<string> = new EventEmitter();
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  public addTask(): void {
+    this.newTask.emit(this.task);
+    this.clearText();
   }
 
+  private clearText(): void {
+    this.task = '';
+  }
 }

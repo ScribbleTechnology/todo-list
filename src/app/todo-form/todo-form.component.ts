@@ -4,12 +4,10 @@ import {Todo} from "../todo.model";
 @Component({
   selector: 'todo-form',
   templateUrl: './todo-form.component.html',
-  styleUrls: ['./todo-form.component.css']
 })
+
 export class TodoFormComponent implements OnInit {
   tasks: Todo[];
-
-  constructor() { }
 
   ngOnInit() {
     this.initTodoItems();
@@ -17,8 +15,13 @@ export class TodoFormComponent implements OnInit {
 
   private initTodoItems() {
     this.tasks = [
-      {id: 1, task: 'first item'},
-      {id: 2, task: 'second item'}
+      {id: 1, task: 'Get Oil Change'},
+      {id: 2, task: 'Grocery Shopping'},
+      {id: 3, task: 'Create Angular 4 Demo'}
     ];
+  }
+
+  onClick(item: string) {
+    this.tasks.push({id: 4, task: item});
   }
 }

@@ -3,6 +3,7 @@
     <div class="well col-xs-6 col-xs-offset-3">
       <h1>To do:</h1>
       <todo-list [tasks]="tasks"></todo-list>
+      <add-todo (newTask)="onClick($event)"></add-todo>
     </div>
   </div>
 </div>

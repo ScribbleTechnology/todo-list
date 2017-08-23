@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Todo} from "../todo.model";
+import {TodoFormService} from "./todo-form.service";
 
 @Component({
   selector: 'todo-form',
@@ -9,19 +10,13 @@ import {Todo} from "../todo.model";
 export class TodoFormComponent implements OnInit {
   tasks: Todo[];
 
+  constructor(private service: TodoFormService){ }
+
   ngOnInit() {
-    this.initTodoItems();
+    this.tasks = this.service.getTasks();
   }
 
-  private initTodoItems() {
-    this.tasks = [
-      {id: 1, task: 'Get Oil Change'},
-      {id: 2, task: 'Grocery Shopping'},
-      {id: 3, task: 'Create Angular 4 Demo'}
-    ];
-  }
-
-  onClick(item: string) {
-    this.tasks.push({id: 4, task: item});
+  onClick(task: string): void {
+    this.tasks.push({task: task});
   }
 }

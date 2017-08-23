@@ -7,6 +7,7 @@ import { TodoFormComponent } from './todo-form/todo-form.component';
 import {TodoListComponent} from "./todo-list/todo-list.component";
 import {AddTodoComponent} from "./add-todo/add-todo.component";
 import {FormsModule} from "@angular/forms";
+import {TodoFormService} from "./todo-form/todo-form.service";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import {FormsModule} from "@angular/forms";
     FormsModule,
     AlertModule.forRoot()
   ],
-  providers: [],
+  providers: [TodoFormService],
   bootstrap: [TodoFormComponent]
 })
 export class AppModule { }

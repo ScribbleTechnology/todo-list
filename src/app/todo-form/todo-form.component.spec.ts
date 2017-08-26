@@ -28,4 +28,13 @@ describe('TodoFormComponent', () => {
 
     expect(fixture.componentInstance.tasks.length).toEqual(4);
   });
+
+  it('should remove task from task list', () => {
+    let tasks = [{task: 'first task', isComplete: false}, {task: 'second task', isComplete: false}];
+    fixture.componentInstance.tasks = tasks;
+    fixture.componentInstance.onDelete(tasks[0]);
+    fixture.detectChanges();
+
+    expect(component.tasks.length).toEqual(1);
+  });
 });

@@ -69,7 +69,7 @@ var _a;
 /***/ "../../../../../src/app/todo-form/todo-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"container\">\n    <div class=\"well col-xs-6 col-xs-offset-3\">\n      <h1>To do:</h1>\n      <todo-list [tasks]=\"tasks\"></todo-list>\n      <add-todo (newTask)=\"onClick($event)\"></add-todo>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"container\">\n    <div class=\"well col-md-6\">\n      <h1>To do:</h1>\n      <todo-list [tasks]=\"tasks\" (task)=\"onUpdate($event)\" (remove)=\"onDelete($event)\"></todo-list>\n      <add-todo (newTask)=\"onClick($event)\"></add-todo>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -99,7 +99,15 @@ var TodoFormComponent = (function () {
         this.tasks = this.service.getTasks();
     };
     TodoFormComponent.prototype.onClick = function (task) {
-        this.tasks.push({ task: task });
+        this.tasks.push({ task: task, isComplete: false });
+    };
+    TodoFormComponent.prototype.onUpdate = function (task) {
+        var index = this.tasks.indexOf(task);
+        this.tasks[index] = task;
+    };
+    TodoFormComponent.prototype.onDelete = function (task) {
+        var index = this.tasks.indexOf(task);
+        this.tasks.splice(index, 1);
     };
     return TodoFormComponent;
 }());
@@ -135,9 +143,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var TodoFormService = (function () {
     function TodoFormService() {
         this.tasks = [
-            { task: 'Get Oil Change' },
-            { task: 'Grocery Shopping' },
-            { task: 'Create Angular 4 Demo' }
+            { task: 'Get Oil Change', isComplete: false },
+            { task: 'Grocery Shopping', isComplete: false },
+            { task: 'Create Angular 4 Demo', isComplete: false }
         ];
     }
     TodoFormService.prototype.getTasks = function () {
@@ -157,7 +165,7 @@ TodoFormService = __decorate([
 /***/ "../../../../../src/app/todo-list/todo-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ul name=\"tasks\" class=\"list-group\">\n  <li *ngFor=\"let task of tasks\" class=\"list-group-item\">{{task.task}}</li>\n</ul>\n"
+module.exports = "<ul name=\"tasks\" class=\"list-group\">\n  <li *ngFor=\"let task of tasks\" class=\"list-group-item\" [ngClass]=\"{'list-group-item-success': task.isComplete}\">\n    <div class=\"pull-right\">\n      <button type=\"button\" class=\"btn btn-xs btn-success\" (click)=\"updateTask(task)\"><i class=\"glyphicon glyphicon-ok\"></i></button>\n      <button name=\"remove-task\" type=\"button\" class=\"btn btn-xs btn-danger\" (click)=\"deleteTask(task)\"><i class=\"glyphicon glyphicon-remove\"></i></button>\n    </div>\n\n    {{task.task}}\n  </li>\n</ul>\n"
 
 /***/ }),
 
@@ -179,13 +187,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var TodoListComponent = (function () {
     function TodoListComponent() {
+        this.task = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+        this.remove = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
     }
+    TodoListComponent.prototype.updateTask = function (task) {
+        task.isComplete = !task.isComplete;
+        this.task.emit(task);
+    };
+    TodoListComponent.prototype.deleteTask = function (task) {
+        this.remove.emit(task);
+    };
     return TodoListComponent;
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
     __metadata("design:type", Array)
 ], TodoListComponent.prototype, "tasks", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Output */])(),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]) === "function" && _a || Object)
+], TodoListComponent.prototype, "task", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Output */])(),
+    __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]) === "function" && _b || Object)
+], TodoListComponent.prototype, "remove", void 0);
 TodoListComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'todo-list',
@@ -193,6 +218,7 @@ TodoListComponent = __decorate([
     })
 ], TodoListComponent);
 
+var _a, _b;
 //# sourceMappingURL=todo-list.component.js.map
 
 /***/ }),

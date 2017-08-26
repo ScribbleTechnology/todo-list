@@ -80,7 +80,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __webpack_require__("../../../../core-js/modules/es6.reflect.apply.js");
 __webpack_require__("../../../../core-js/modules/es6.reflect.construct.js");
 __webpack_require__("../../../../core-js/modules/es6.reflect.define-property.js");
-__webpack_require__("../../../../core-js/modules/es6.reflect.remove-property.js");
+__webpack_require__("../../../../core-js/modules/es6.reflect.delete-property.js");
 __webpack_require__("../../../../core-js/modules/es6.reflect.enumerate.js");
 __webpack_require__("../../../../core-js/modules/es6.reflect.get.js");
 __webpack_require__("../../../../core-js/modules/es6.reflect.get-own-property-descriptor.js");
@@ -100,7 +100,7 @@ module.exports = __webpack_require__("../../../../core-js/modules/_core.js").Ref
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__("../../../../core-js/modules/es7.reflect.define-metadata.js");
-__webpack_require__("../../../../core-js/modules/es7.reflect.remove-metadata.js");
+__webpack_require__("../../../../core-js/modules/es7.reflect.delete-metadata.js");
 __webpack_require__("../../../../core-js/modules/es7.reflect.get-metadata.js");
 __webpack_require__("../../../../core-js/modules/es7.reflect.get-metadata-keys.js");
 __webpack_require__("../../../../core-js/modules/es7.reflect.get-own-metadata.js");
@@ -407,8 +407,8 @@ module.exports = {
         that._f = that._l = undefined;
         that[SIZE] = 0;
       },
-      // 23.1.3.3 Map.prototype.remove(key)
-      // 23.2.3.4 Set.prototype.remove(value)
+      // 23.1.3.3 Map.prototype.delete(key)
+      // 23.2.3.4 Set.prototype.delete(value)
       'delete': function (key) {
         var that = validate(this, NAME);
         var entry = getEntry(that, key);
@@ -568,12 +568,12 @@ module.exports = {
       if (iterable != undefined) forOf(iterable, IS_MAP, that[ADDER], that);
     });
     redefineAll(C.prototype, {
-      // 23.3.3.2 WeakMap.prototype.remove(key)
-      // 23.4.3.3 WeakSet.prototype.remove(value)
+      // 23.3.3.2 WeakMap.prototype.delete(key)
+      // 23.4.3.3 WeakSet.prototype.delete(value)
       'delete': function (key) {
         if (!isObject(key)) return false;
         var data = getWeak(key);
-        if (data === true) return uncaughtFrozenStore(validate(this, NAME))['remove'](key);
+        if (data === true) return uncaughtFrozenStore(validate(this, NAME))['delete'](key);
         return data && $has(data, this._i) && delete data[this._i];
       },
       // 23.3.3.4 WeakMap.prototype.has(key)
@@ -626,7 +626,7 @@ module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
   var fixMethod = function (KEY) {
     var fn = proto[KEY];
     redefine(proto, KEY,
-      KEY == 'remove' ? function (a) {
+      KEY == 'delete' ? function (a) {
         return IS_WEAK && !isObject(a) ? false : fn.call(this, a === 0 ? 0 : a);
       } : KEY == 'has' ? function has(a) {
         return IS_WEAK && !isObject(a) ? false : fn.call(this, a === 0 ? 0 : a);
@@ -670,7 +670,7 @@ module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
       proto.constructor = C;
     }
     if (THROWS_ON_PRIMITIVES || BUGGY_ZERO) {
-      fixMethod('remove');
+      fixMethod('delete');
       fixMethod('has');
       IS_MAP && fixMethod('get');
     }
@@ -2315,7 +2315,7 @@ if (fails(function () { return new $WeakMap().set((Object.freeze || Object)(tmp)
   InternalMap = weak.getConstructor(wrapper, WEAK_MAP);
   assign(InternalMap.prototype, methods);
   meta.NEED = true;
-  each(['remove', 'has', 'get', 'set'], function (key) {
+  each(['delete', 'has', 'get', 'set'], function (key) {
     var proto = $WeakMap.prototype;
     var method = proto[key];
     redefine(proto, key, function (a, b) {
@@ -2360,11 +2360,11 @@ var store = metadata.store;
 metadata.exp({ deleteMetadata: function deleteMetadata(metadataKey, target /* , targetKey */) {
   var targetKey = arguments.length < 3 ? undefined : toMetaKey(arguments[2]);
   var metadataMap = getOrCreateMetadataMap(anObject(target), targetKey, false);
-  if (metadataMap === undefined || !metadataMap['remove'](metadataKey)) return false;
+  if (metadataMap === undefined || !metadataMap['delete'](metadataKey)) return false;
   if (metadataMap.size) return true;
   var targetMetadata = store.get(target);
-  targetMetadata['remove'](targetKey);
-  return !!targetMetadata.size || store['remove'](target);
+  targetMetadata['delete'](targetKey);
+  return !!targetMetadata.size || store['delete'](target);
 } });
 
 
@@ -2611,7 +2611,7 @@ var Zone$1 = (function (global) {
             enumerable: true,
             configurable: true
         });
-
+        
         Object.defineProperty(Zone, "currentTask", {
             get: function () {
                 return _currentTask;
@@ -2619,7 +2619,7 @@ var Zone$1 = (function (global) {
             enumerable: true,
             configurable: true
         });
-
+        
         Zone.__load_patch = function (name, fn) {
             if (patches.hasOwnProperty(name)) {
                 throw Error('Already loaded patch: ' + name);
@@ -2638,7 +2638,7 @@ var Zone$1 = (function (global) {
             enumerable: true,
             configurable: true
         });
-
+        
         Object.defineProperty(Zone.prototype, "name", {
             get: function () {
                 return this._name;
@@ -2646,7 +2646,7 @@ var Zone$1 = (function (global) {
             enumerable: true,
             configurable: true
         });
-
+        
         Zone.prototype.get = function (key) {
             var zone = this.getZoneWith(key);
             if (zone)

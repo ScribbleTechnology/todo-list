@@ -13,8 +13,10 @@ export class AddTodoComponent implements OnInit {
   ngOnInit() { }
 
   public addTask(): void {
-    this.newTask.emit(this.task);
-    this.clearText();
+    if (this.task.length > 0) {
+      this.newTask.emit(this.task);
+      this.clearText();
+    }
   }
 
   private clearText(): void {

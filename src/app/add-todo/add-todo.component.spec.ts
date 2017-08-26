@@ -40,4 +40,14 @@ describe('AddTodoComponent', () => {
 
     expect(component.newTask.emit).toHaveBeenCalledWith('Creating a new task');
   });
+
+  it('should NOT add task when no task is added', () => {
+    spyOn(component.newTask, 'emit');
+
+    fixture.componentInstance.task = '';
+    fixture.nativeElement.querySelector('[name=add-task]').click();
+    fixture.detectChanges();
+
+    expect(component.newTask.emit).toHaveBeenCalledTimes(0);
+  });
 });

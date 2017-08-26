@@ -11,7 +11,7 @@ export class TodoListComponent {
   @Output() task: EventEmitter<Todo> = new EventEmitter();
 
   updateTask(task: Todo) {
-    task.isComplete = true;
+    task.isComplete = !task.isComplete;
     this.task.emit(task);
   }
 }

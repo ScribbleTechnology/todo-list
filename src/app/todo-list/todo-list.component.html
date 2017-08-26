@@ -1,7 +1,7 @@
 <ul name="tasks" class="list-group">
   <li *ngFor="let task of tasks" class="list-group-item" [ngClass]="{'list-group-item-success': task.isComplete}">
     <div class="pull-right">
-      <button type="button" class="btn btn-xs btn-success" (click)="updateTask(task)"><i class="glyphicon glyphicon-check"></i></button>
+      <button type="button" class="btn btn-xs btn-success" (click)="updateTask(task)"><i class="glyphicon glyphicon-ok"></i></button>
     </div>
 
     {{task.task}}

@@ -69,7 +69,7 @@ var _a;
 /***/ "../../../../../src/app/todo-form/todo-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"container\">\n    <div class=\"well col-md-6\">\n      <h1>To do:</h1>\n      <todo-list [tasks]=\"tasks\" (task)=\"onUpdate($event)\" (remove)=\"onDelete($event)\"></todo-list>\n      <add-todo (newTask)=\"onClick($event)\"></add-todo>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"container\">\n    <div class=\"well col-md-6 col-md-offset-3\">\n      <h1>To do:</h1>\n      <todo-list [tasks]=\"tasks\" (task)=\"onUpdate($event)\" (remove)=\"onDelete($event)\"></todo-list>\n      <add-todo (newTask)=\"onClick($event)\"></add-todo>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 

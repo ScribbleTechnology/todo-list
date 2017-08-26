@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Todo} from "../todo.model";
 
 @Component({
@@ -8,4 +8,10 @@ import {Todo} from "../todo.model";
 
 export class TodoListComponent {
   @Input() tasks: Todo[];
+  @Output() task: EventEmitter<Todo> = new EventEmitter();
+
+  updateTask(task: Todo) {
+    task.isComplete = true;
+    this.task.emit(task);
+  }
 }

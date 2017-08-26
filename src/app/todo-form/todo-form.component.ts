@@ -19,4 +19,9 @@ export class TodoFormComponent implements OnInit {
   onClick(task: string): void {
     this.tasks.push({task: task, isComplete: false});
   }
+
+  onUpdate(task: Todo): void {
+    let index = this.tasks.indexOf(task);
+    this.tasks[index] = task;
+  }
 }

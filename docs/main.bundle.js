@@ -42,8 +42,10 @@ var AddTodoComponent = (function () {
     }
     AddTodoComponent.prototype.ngOnInit = function () { };
     AddTodoComponent.prototype.addTask = function () {
-        this.newTask.emit(this.task);
-        this.clearText();
+        if (this.task.length > 0) {
+            this.newTask.emit(this.task);
+            this.clearText();
+        }
     };
     AddTodoComponent.prototype.clearText = function () {
         this.task = '';

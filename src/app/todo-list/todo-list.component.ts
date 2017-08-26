@@ -9,9 +9,14 @@ import {Todo} from "../todo.model";
 export class TodoListComponent {
   @Input() tasks: Todo[];
   @Output() task: EventEmitter<Todo> = new EventEmitter();
+  @Output() remove: EventEmitter<Todo> = new EventEmitter();
 
-  updateTask(task: Todo) {
+  updateTask(task: Todo): void{
     task.isComplete = !task.isComplete;
     this.task.emit(task);
+  }
+
+  deleteTask(task: Todo): void {
+    this.remove.emit(task);
   }
 }

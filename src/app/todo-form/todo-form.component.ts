@@ -24,4 +24,9 @@ export class TodoFormComponent implements OnInit {
     let index = this.tasks.indexOf(task);
     this.tasks[index] = task;
   }
+
+  onDelete(task: Todo): void {
+    let index = this.tasks.indexOf(task);
+    this.tasks.splice(index, 1);
+  }
 }

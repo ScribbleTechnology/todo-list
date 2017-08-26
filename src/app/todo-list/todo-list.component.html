@@ -2,6 +2,7 @@
   <li *ngFor="let task of tasks" class="list-group-item" [ngClass]="{'list-group-item-success': task.isComplete}">
     <div class="pull-right">
       <button type="button" class="btn btn-xs btn-success" (click)="updateTask(task)"><i class="glyphicon glyphicon-ok"></i></button>
+      <button name="remove-task" type="button" class="btn btn-xs btn-danger" (click)="deleteTask(task)"><i class="glyphicon glyphicon-remove"></i></button>
     </div>
 
     {{task.task}}

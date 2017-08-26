@@ -15,9 +15,9 @@ describe('TodoFormService', () => {
 
   it('should return task data', inject([TodoFormService], (service: TodoFormService) => {
     service.tasks = [
-      {task: 'Get Oil Change'},
-      {task: 'Grocery Shopping'},
-      {task: 'Create Angular 4 Demo'}
+      {task: 'Get Oil Change', isComplete: true},
+      {task: 'Grocery Shopping', isComplete: false},
+      {task: 'Create Angular 4 Demo', isComplete: false}
     ];
 
     const actual = service.getTasks();

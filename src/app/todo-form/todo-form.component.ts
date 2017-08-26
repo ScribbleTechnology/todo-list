@@ -17,6 +17,6 @@ export class TodoFormComponent implements OnInit {
   }
 
   onClick(task: string): void {
-    this.tasks.push({task: task});
+    this.tasks.push({task: task, isComplete: false});
   }
 }

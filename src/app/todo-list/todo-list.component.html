@@ -1,3 +1,5 @@
 <ul name="tasks" class="list-group">
-  <li *ngFor="let task of tasks" class="list-group-item">{{task.task}}</li>
+  <li *ngFor="let task of tasks" class="list-group-item" [ngClass]="{'list-group-item-success': task.isComplete}">
+    {{task.task}}
+  </li>
 </ul>
